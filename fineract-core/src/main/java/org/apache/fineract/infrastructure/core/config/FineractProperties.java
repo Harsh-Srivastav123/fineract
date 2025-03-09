@@ -349,6 +349,8 @@ public class FineractProperties {
         private List<String> mimeWhitelist;
         private FineractContentFilesystemProperties filesystem;
         private FineractContentS3Properties s3;
+
+
     }
 
     @Getter

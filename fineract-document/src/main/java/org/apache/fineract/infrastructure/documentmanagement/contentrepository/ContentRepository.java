@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -19,23 +19,19 @@
 package org.apache.fineract.infrastructure.documentmanagement.contentrepository;
 
 import java.io.InputStream;
+
 import org.apache.fineract.infrastructure.core.domain.Base64EncodedImage;
 import org.apache.fineract.infrastructure.documentmanagement.command.DocumentCommand;
 import org.apache.fineract.infrastructure.documentmanagement.data.DocumentData;
 import org.apache.fineract.infrastructure.documentmanagement.data.FileData;
 import org.apache.fineract.infrastructure.documentmanagement.data.ImageData;
 import org.apache.fineract.infrastructure.documentmanagement.domain.StorageType;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * Repository which stores Files (AKA Documents) and Images.
  */
 public interface ContentRepository {
-
-    // TODO:Vishwas Need to move these settings to the Database
-    Integer MAX_FILE_UPLOAD_SIZE_IN_MB = 5;
-
-    // TODO:Vishwas Need to move these settings to the Database
-    Integer MAX_IMAGE_UPLOAD_SIZE_IN_MB = 1;
 
     String saveFile(InputStream uploadedInputStream, DocumentCommand documentCommand);
 

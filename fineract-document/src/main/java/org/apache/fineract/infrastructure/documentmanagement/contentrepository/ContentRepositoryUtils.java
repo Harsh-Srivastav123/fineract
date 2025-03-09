@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -19,10 +19,13 @@
 package org.apache.fineract.infrastructure.documentmanagement.contentrepository;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
+import org.apache.fineract.infrastructure.core.config.FineractProperties;
 import org.apache.fineract.infrastructure.core.data.ApiParameterError;
 import org.apache.fineract.infrastructure.core.domain.Base64EncodedImage;
 import org.apache.fineract.infrastructure.core.exception.ImageDataURLNotValidException;
@@ -33,8 +36,10 @@ import org.apache.fineract.infrastructure.documentmanagement.exception.ContentMa
 public final class ContentRepositoryUtils {
 
     private static final SecureRandom random = new SecureRandom();
+    private FineractProperties fineractProperties;
 
-    private ContentRepositoryUtils() {}
+    private ContentRepositoryUtils() {
+    }
 
     public enum ImageMIMEtype {
 
@@ -167,7 +172,7 @@ public final class ContentRepositoryUtils {
          * length of the rest of the content i.e name and description while compared to the uploaded file size is
          * negligible
          **/
-        if (fileSize != null && ((fileSize / (1024 * 1024)) > ContentRepository.MAX_FILE_UPLOAD_SIZE_IN_MB)) {
+        if (fileSize != null && ((fileSize / (1024 * 1024)) > finer.MAX_FILE_UPLOAD_SIZE_IN_MB)) {
             throw new ContentManagementException(name, fileSize, ContentRepository.MAX_FILE_UPLOAD_SIZE_IN_MB);
         }
     }
@@ -190,7 +195,7 @@ public final class ContentRepositoryUtils {
      */
 
     @SuppressFBWarnings(value = {
-            "DMI_RANDOM_USED_ONLY_ONCE" }, justification = "False positive for random object created and used only once")
+            "DMI_RANDOM_USED_ONLY_ONCE"}, justification = "False positive for random object created and used only once")
     public static String generateRandomString() {
         final String characters = "abcdefghijklmnopqrstuvwxyz123456789";
         // length is a random number between 5 to 16
